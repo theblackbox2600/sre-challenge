@@ -13,8 +13,9 @@ spec:
         app: invoice-app
     spec:
       containers:
-      - name: main
+      - name: invoice-app
         image: invoice-app:latest
         imagePullPolicy: IfNotPresent
       securityContext:
+        runAsUser: 999
         runAsNonRoot: true

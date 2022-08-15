@@ -1,3 +1,5 @@
 #!/bin/bash
+HOME=~/sre-challenge
 
-# this is your part to fill
+kubectl apply -f $HOME/payment-provider/deployment.yaml
+kubectl apply -f $HOME/invoice-app/deployment.yaml

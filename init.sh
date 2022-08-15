@@ -1,5 +1,8 @@
 #!/bin/bash
-HOME=~/sre-challenge/
+HOME=~/sre-challenge
+
+minikube start
+eval $(minikube -p minikube docker-env)
 
 # this is your part to fill
 cd $HOME/invoice-app
