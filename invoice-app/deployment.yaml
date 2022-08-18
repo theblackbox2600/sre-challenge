@@ -30,7 +30,7 @@ apiVersion: v1
 metadata:
   name: invoice-app
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: invoice-app
   ports:
