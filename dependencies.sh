@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Upgrade packages
 apt-get update
 apt-get upgrade -y
+
+apt-get install jq
 
 # get and install latest minikube package
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
