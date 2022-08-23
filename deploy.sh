@@ -1,3 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+HOME=~/sre-challenge
 
-# this is your part to fill
+echo "Commencing initial deployment"
+kubectl apply -f $HOME/payment-provider/deployment.yaml;
+kubectl apply -f $HOME/invoice-app/deployment.yaml;

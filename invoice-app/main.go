@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"os"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -45,7 +46,8 @@ func pay(c *gin.Context) {
 		}
 		b, err := json.Marshal(req)
 		data := bytes.NewBuffer(b)
-		_, err = client.Post("http://payment-provider:8082/payments/pay", "application/json", data)
+// 		_, err = client.Post("http://payment-provider:8082/payments/pay", "application/json", data)
+		_, err = client.Post(os.Getenv("PAYMENT_API_ENDPOINT"), "application/json", data)
 
 		if err != nil {
 			fmt.Printf("Error %s", err)

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: invoice-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: invoice-app
@@ -13,8 +13,28 @@ spec:
         app: invoice-app
     spec:
       containers:
-      - name: main
+      - name: invoice-app
+        ports:
+          - containerPort: 8081
         image: invoice-app:latest
         imagePullPolicy: IfNotPresent
+        env:
+          - name: PAYMENT_API_ENDPOINT
+            value: http://payment-provider:8082/payments/pay
       securityContext:
+        runAsUser: 999
         runAsNonRoot: true
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: invoice-app
+spec:
+  type: NodePort
+  selector:
+    app: invoice-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8081
+      targetPort: 8081

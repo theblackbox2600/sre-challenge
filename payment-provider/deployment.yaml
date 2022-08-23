@@ -13,8 +13,26 @@ spec:
         app: payment-provider
     spec:
       containers:
-      - name: main
+      - name: payment-provider
+        ports:
+          - containerPort: 8082
         image: payment-provider:latest
         imagePullPolicy: IfNotPresent
       securityContext:
+        runAsUser: 999
         runAsNonRoot: true
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: payment-provider
+spec:
+  type: ClusterIP
+  selector:
+    app: payment-provider
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8082
+      targetPort: 8082
